@@ -1,18 +1,36 @@
 import java.util.ArrayList;
-import java.util.Stack;
 import java.util.Random;
-import java.util.Arrays;
+import java.util.Stack;
 
-class MazeGenerator {
+public class MazeGenerator {
+    public static void main(String[] args) {
+
+        System.out.println(MazeGenerator.generateMaze(30));
+    }
+
+    public static class Node {
+        public final int x, y;
+
+        Node(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+    }
     
-    private Stack<Node> stack = new Stack<>();
-    private Random rand = new Random();
-    private int[][] maze;
-    private int dimension;
+    private final Stack<Node> stack = new Stack<>();
+    private final Random rand = new Random();
+    private final int[][] maze;
+    private final int dimension;
 
     MazeGenerator(int dim) {
         maze = new int[dim][dim];
         dimension = dim;
+    }
+
+    public static String generateMaze(int dim) {
+        MazeGenerator mazeGenerator = new MazeGenerator(dim);
+        mazeGenerator.generateMaze();
+        return mazeGenerator.getSymbolicMaze();
     }
 
     public void generateMaze() {
@@ -27,23 +45,17 @@ class MazeGenerator {
         }
     }
 
-    public String getRawMaze() {
-        StringBuilder sb = new StringBuilder();
-        for (int[] row : maze) {
-            sb.append(Arrays.toString(row) + "\n");
-        }
-        return sb.toString();
-    }
-
     public String getSymbolicMaze() {
         StringBuilder sb = new StringBuilder();
+        sb.append("█".repeat(dimension+2)).append("\n");
         for (int i = 0; i < dimension; i++) {
+            sb.append("█");
             for (int j = 0; j < dimension; j++) {
-                sb.append(maze[i][j] == 1 ? "*" : " ");
-                sb.append("  "); 
+                sb.append(maze[i][j] == 1 ? " " : "█");
             }
-            sb.append("\n");
+            sb.append("█\n");
         }
+        sb.append("█".repeat(dimension+2)).append("\n");
         return sb.toString();
     }
 
