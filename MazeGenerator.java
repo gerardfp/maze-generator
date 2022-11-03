@@ -4,7 +4,6 @@ import java.util.Stack;
 
 public class MazeGenerator {
     public static void main(String[] args) {
-
         System.out.println(MazeGenerator.generateMaze(30));
     }
 
@@ -17,12 +16,12 @@ public class MazeGenerator {
         }
     }
     
-    private final Stack<Node> stack = new Stack<>();
-    private final Random rand = new Random();
-    private final int[][] maze;
-    private final int dimension;
+    public final Stack<Node> stack = new Stack<>();
+    public final Random rand = new Random();
+    public final int[][] maze;
+    public final int dimension;
 
-    MazeGenerator(int dim) {
+    public MazeGenerator(int dim) {
         maze = new int[dim][dim];
         dimension = dim;
     }
@@ -59,7 +58,7 @@ public class MazeGenerator {
         return sb.toString();
     }
 
-    private boolean validNextNode(Node node) {
+    public boolean validNextNode(Node node) {
         int numNeighboringOnes = 0;
         for (int y = node.y-1; y < node.y+2; y++) {
             for (int x = node.x-1; x < node.x+2; x++) {
@@ -71,7 +70,7 @@ public class MazeGenerator {
         return (numNeighboringOnes < 3) && maze[node.y][node.x] != 1;
     }
 
-    private void randomlyAddNodesToStack(ArrayList<Node> nodes) {
+    public void randomlyAddNodesToStack(ArrayList<Node> nodes) {
         int targetIndex;
         while (!nodes.isEmpty()) {
             targetIndex = rand.nextInt(nodes.size());
@@ -79,7 +78,7 @@ public class MazeGenerator {
         }
     }
 
-    private ArrayList<Node> findNeighbors(Node node) {
+    public ArrayList<Node> findNeighbors(Node node) {
         ArrayList<Node> neighbors = new ArrayList<>();
         for (int y = node.y-1; y < node.y+2; y++) {
             for (int x = node.x-1; x < node.x+2; x++) {
@@ -92,15 +91,15 @@ public class MazeGenerator {
         return neighbors;
     }
 
-    private Boolean pointOnGrid(int x, int y) {
+    public Boolean pointOnGrid(int x, int y) {
         return x >= 0 && y >= 0 && x < dimension && y < dimension;
     }
 
-    private Boolean pointNotCorner(Node node, int x, int y) {
+    public Boolean pointNotCorner(Node node, int x, int y) {
         return (x == node.x || y == node.y);
     }
     
-    private Boolean pointNotNode(Node node, int x, int y) {
+    public Boolean pointNotNode(Node node, int x, int y) {
         return !(x == node.x && y == node.y);
     }
 }
