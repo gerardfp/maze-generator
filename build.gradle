@@ -1,0 +1,16 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
+group 'com.github.gerardfp'
+version '1.0'
+
+publishing {
+    publications {
+        gpr(MavenPublication) {
+            artifactId = "maze-generator"
+            from(components.java)
+        }
+    }
+}
