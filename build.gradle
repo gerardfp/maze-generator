@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'com.github.gerardfp'
-version '1.0'
+version '5.0'
 
 publishing {
     publications {
